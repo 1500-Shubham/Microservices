@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mongo-db:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodbTarget4
+    ports:
+      - "27017:27017"
+    restart: on-failure  
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodejs-backend
+    environment:
+      - MONGO_URI=mongodb://mongo-db:27017/mydatabase
+      # - PORT=4000
+      # pehle mongo_URI localhost:27017 inside container no localhost toh service name de do
+    ports:
+      - "4000:${PORT}"
+    depends_on:
+      - mongo-db
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  mongo-data: {} #the volume that we need to create if not present

@@ -1,0 +1,24 @@
+//two services one backend and other mongodb
+// create user on mongodb and read 
+
+
+
+Learning with this target 
+// with the help of .yml file change .env file in backend 
+
+
+//setup mongodb with docker
+docker pull mongodb/mongodb-community-server:latest
+docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
+
+
+// can run both service backend and mongodb
+dockerfile and dockeryml file 
+only see how mongouri can be changed in .env file
+
+
+for backedn service need to connect to mongo-db service toh aise MONGO_URI change hoga
+environment:
+      - MONGO_URI=mongodb://mongo-db:27017/mydatabase
+      # - PORT=4000
+      # pehle mongo_URI localhost:27017 inside container no localhost toh service name de do
